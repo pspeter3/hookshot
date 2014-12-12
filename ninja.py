@@ -23,12 +23,12 @@ def data(token = None, whitelist = None):
   has_time = False
   for guid, status in payload.get("data", {}).iteritems():
     if guid in whitelist:
-      data = status.get("last_data", {})
+      last_data = status.get("last_data", {})
       type = status.get("device_type", guid)
-      value = data.get("DA")
+      value = last_data.get("DA")
       if not has_time:
         data["columns"].append("time")
-        data["points"].append(data.get("timestamp"))
+        data["points"].append(last_data.get("timestamp"))
       if type in transforms:
         value = transforms[type](value)
       data["columns"].append(type)
