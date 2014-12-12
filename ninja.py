@@ -29,6 +29,7 @@ def data(token = None, whitelist = None):
       if not has_time:
         data["columns"].append("time")
         data["points"].append(last_data.get("timestamp"))
+        has_time = True
       if type in transforms:
         value = transforms[type](value)
       data["columns"].append(type)
