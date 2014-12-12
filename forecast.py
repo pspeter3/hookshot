@@ -25,7 +25,7 @@ def data(token=None, lat_lon=None):
   }
   for key, value in payload.get("currently", {}).iteritems():
     if key != "icon" and key != "summary":
-      if type in transforms:
+      if key in transforms:
         value = transforms[type](value)
       data["columns"].append(_convert(key))
       data["points"].append(value)
