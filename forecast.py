@@ -1,5 +1,10 @@
+import re
 import requests
 import os
+
+def _convert(name):
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 def data(token=None, lat_lon=None):
   if token is None:
@@ -16,6 +21,6 @@ def data(token=None, lat_lon=None):
   }
   for key, value in payload.get("currently", {}).iteritems():
     if key is not "icon" and key is not "summary":
-      data["columns"].append(key)
+      data["columns"].append(_convert(key))
       data["points"].append(value)
   return data
