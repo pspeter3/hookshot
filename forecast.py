@@ -23,4 +23,5 @@ def data(token=None, lat_lon=None):
     if key is not "icon" and key is not "summary":
       data["columns"].append(_convert(key))
       data["points"].append(value)
+  data["points"] = [data["points"]]
   return data

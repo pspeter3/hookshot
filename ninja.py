@@ -28,5 +28,5 @@ def data(token = None, whitelist = None):
     "name": "ninja",
     "time_precision": "ms",
     "columns": ["time", "type", "value"],
-    "points": points
+    "points": [points]
   }
