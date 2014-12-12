@@ -1,3 +1,4 @@
+import conversions
 import re
 import requests
 import os
@@ -16,11 +17,14 @@ def data(token=None, lat_lon=None):
   payload = response.json()
   data = {
     "name": "forecast",
+    "time_precision": "s",
     "columns": [],
     "points": []
   }
   for key, value in payload.get("currently", {}).iteritems():
     if key != "icon" and key != "summary":
+      if key == "temperature":
+        value = conversions.temperature(value)
       data["columns"].append(_convert(key))
       data["points"].append(value)
   data["points"] = [data["points"]]

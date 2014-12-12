@@ -1,9 +1,6 @@
+import conversions
 import requests
 import os
-
-transforms = {
-  "temperature": lambda x: ((9 * x)/ 5.) + 32
-}
 
 def data(token = None, whitelist = None):
   if token is None:
@@ -30,8 +27,8 @@ def data(token = None, whitelist = None):
         data["columns"].append("time")
         data["points"].append(last_data.get("timestamp"))
         has_time = True
-      if type in transforms:
-        value = transforms[type](value)
+      if type == "temperature":
+        value = conversions.temperature(value)
       data["columns"].append(type)
       data["points"].append(value)
   data["points"] = [data["points"]]
