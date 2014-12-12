@@ -29,4 +29,3 @@ def data(token = None, whitelist = None):
     "columns": ["time", "type", "value"],
     "points": points
   }
-)
