@@ -20,12 +20,13 @@ def data(token = None, whitelist = None):
       data = status.get("last_data", {})
       type = status.get("device_type", guid)
       value = data.get("DA")
-      timestamp = data.get("timestamp") / 1000.
+      timestamp = data.get("timestamp")
       if type in transforms:
         value = transforms[type](value)
       points.append([timestamp, type, value])
   return {
     "name": "ninja",
+    "time_precision": "ms",
     "columns": ["time", "type", "value"],
     "points": points
   }
