@@ -16,7 +16,6 @@ def data(token = None, whitelist = None):
   payload = response.json()
   data = {
     "name": "ninja",
-    "time_precision": "ms",
     "columns": [],
     "points": []
   }
