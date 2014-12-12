@@ -12,6 +12,4 @@ def write(points, base_url=None, database=None, user=None, password=None):
   if password is None:
     password = os.getenv("INFLUXDB_PASSWORD", "root")
   url = "%s/db/%s/series?u=%s&p=%s" %(base_url, database, user, password)
-  requests.post(url, data=json.dumps(points), headers={
-    "Content-Type": "application/json"
-  })
+  requests.post(url, data=json.dumps(points))

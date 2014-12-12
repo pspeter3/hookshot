@@ -33,4 +33,5 @@ def data(token = None, whitelist = None):
         value = transforms[type](value)
       data["columns"].append(type)
       data["points"].append(value)
+  data["points"] = [data["points"]]
   return data

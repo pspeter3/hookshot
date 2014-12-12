@@ -20,7 +20,7 @@ def data(token=None, lat_lon=None):
     "points": []
   }
   for key, value in payload.get("currently", {}).iteritems():
-    if key is not "icon" and key is not "summary":
+    if key != "icon" and key != "summary":
       data["columns"].append(_convert(key))
       data["points"].append(value)
   data["points"] = [data["points"]]
