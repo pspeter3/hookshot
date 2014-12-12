@@ -14,19 +14,23 @@ def data(token = None, whitelist = None):
     "user_access_token": token
   })
   payload = response.json()
-  points = []
+  data = {
+    "name": "ninja",
+    "time_precision": "ms",
+    "columns": [],
+    "points": []
+  }
+  has_time = False
   for guid, status in payload.get("data", {}).iteritems():
     if guid in whitelist:
       data = status.get("last_data", {})
       type = status.get("device_type", guid)
       value = data.get("DA")
-      timestamp = data.get("timestamp")
+      if not has_time:
+        data["columns"].append("time")
+        data["points"].append(data.get("timestamp"))
       if type in transforms:
         value = transforms[type](value)
-      points.append([timestamp, type, value])
-  return {
-    "name": "ninja",
-    "time_precision": "ms",
-    "columns": ["time", "type", "value"],
-    "points": [points]
-  }
+      data["columns"].append(type)
+      data["points"].append(value)
+  return data
